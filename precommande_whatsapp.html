@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Précommande - CasioHouse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f172a; --card:#111827; --muted:#94a3b8; --accent:#22c55e; --text:#e5e7eb; --input:#1f2937;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; background:linear-gradient(135deg,#0b1224 0%, #0f172a 60%, #0b1224 100%); color:var(--text);}
+    .wrap{max-width:920px; margin:32px auto; padding:24px;}
+    .card{background:rgba(17,24,39,.9); border:1px solid rgba(148,163,184,.15); backdrop-filter: blur(6px); border-radius:20px; padding:26px; box-shadow: 0 10px 30px rgba(0,0,0,.35);}
+    h1{font-size:28px; margin:0 0 8px; letter-spacing:.2px}
+    p.lead{margin:0 0 20px; color:var(--muted)}
+    .grid{display:grid; grid-template-columns:1fr; gap:16px}
+    @media(min-width:860px){ .grid{grid-template-columns: repeat(2,1fr);} }
+    label{font-weight:600; font-size:14px; margin-bottom:6px; display:block}
+    input, select, textarea{
+      width:100%; padding:12px 14px; background:var(--input); border:1px solid rgba(148,163,184,.2);
+      color:var(--text); border-radius:12px; outline:none; transition:.2s border-color, .2s box-shadow;
+    }
+    input:focus, select:focus, textarea:focus{ border-color: var(--accent); box-shadow:0 0 0 4px rgba(34,197,94,.15); }
+    .row{display:flex; gap:12px}
+    .row > *{flex:1}
+    .pill{display:inline-flex; align-items:center; gap:8px; background:rgba(34,197,94,.12); color:#bbf7d0; padding:8px 12px; border-radius:999px; font-weight:600; font-size:13px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px; width:100%;
+      padding:14px 16px; border-radius:14px; border:0; cursor:pointer; font-weight:700;
+      background:linear-gradient(135deg,#22c55e,#16a34a); color:#06240f; letter-spacing:.3px; font-size:16px;
+      box-shadow: 0 10px 18px rgba(34,197,94,.25);
+    }
+    .btn:disabled{opacity:.6; cursor:not-allowed}
+    .muted{color:var(--muted); font-size:13px}
+    .summary{margin-top:6px; font-size:14px; color:#d1fae5}
+    .footer{margin-top:18px; font-size:12px; color:var(--muted); text-align:center}
+    .brand{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+    .brand-badge{width:36px; height:36px; display:inline-grid; place-items:center; border-radius:10px; background:linear-gradient(135deg,#22c55e33,#22c55e55); border:1px solid #22c55e66}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="brand">
+        <div class="brand-badge">🎮</div>
+        <div>
+          <h1>Formulaire de <span style="color:#86efac">précommande</span></h1>
+          <p class="lead">Réservez votre article maintenant avec un acompte de <strong>1/3 du prix</strong>. Nous vous confirmerons la commande par WhatsApp.</p>
+        </div>
+      </div>
+
+      <form id="preorderForm">
+        <div class="grid">
+          <div>
+            <label for="product">Produit</label>
+            <select id="product" required>
+              <option value="" disabled selected>Choisir un produit</option>
+              <option value="Console rétro portable|23000|variant">Console rétro portable</option>
+              <option value="Gourde BambVerre A|5500|no-variant">Gourde BambVerre A</option>
+              <option value="Gourde BambVerre B|5500|no-variant">Gourde BambVerre B</option>
+              <!-- Ajoutez ici d'autres produits au besoin, format: Nom|PrixEnFCFA -->
+            </select>
+            <div class="summary" id="priceLine"></div>
+          </div>
+
+          <div>
+             
+            <label for="variant">Couleur / Modèle </label>
+            <select id="Couleur" required>
+            <option value="" disabled selected>Choisir une couleur</option>
+
+            <option value="Noir|transparent">Noir</option>
+
+            <option value="blanc|transparent">blanc</option>
+
+            <option value="bleu|transparent">bleu</option>
+
+            <option value="violet|transparent">violet</option>
+
+           </select>
+           <div class="summary" id="priceLine"></div>
+            
+            
+          </div>
+
+       
+          <div class="row">
+            <div>
+              <label for="qty">Quantité</label>
+              <input id="qty" type="number" value="1" min="1" required />
+            </div>
+            <div>
+              <label for="city">Ville</label>
+              <input id="city" placeholder="Ex: Ouagadougou,Bobo dioulasso, Abidjan…" required />
+            </div>
+          </div>
+
+          <div>
+            <label for="delivery">Mode de livraison</label>
+            <select id="delivery" required>
+              <option value="" disabled selected>Choisir</option>
+              <option>Retrait en boutique</option>
+              <option>Livraison à domicile</option>
+              <option>Point relais</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="name">Nom & Prénom</label>
+              <input id="name" required />
+            </div>
+            <div>
+              <label for="phone">Téléphone (WhatsApp)</label>
+              <input id="phone" required placeholder="+226 xx xx xx xx" />
+            </div>
+          </div>
+
+          <div>
+            <label for="pay">Moyen de paiement pour l’acompte (1/3)</label>
+            <select id="pay" required>
+              <option value="" disabled selected>Choisir</option>
+              <option>Orange Money</option>
+              <option>Wave</option>
+              <option>Espèces (en boutique)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="notes">Notes (taille, préférences, adresse complète…)</label>
+            <textarea id="notes" rows="3" placeholder="Votre message…"></textarea>
+          </div>
+        </div>
+
+        <div style="margin:18px 0">
+          <span class="pill">💡 Acompte estimé : <span id="deposit">—</span></span>
+        </div>
+
+        <button class="btn" type="submit">📩 Envoyer ma précommande par WhatsApp</button>
+        <p class="muted">En cliquant, un message pré-rempli s’ouvrira dans WhatsApp. Vous pourrez le valider avant envoi.</p>
+      </form>
+
+      <div class="footer">
+        CasioHouse — Merci pour votre confiance 💚
+      </div>
+    </div>
+  </div>
+
+<script>
+// 👉 REMPLACEZ CE NUMÉRO PAR VOTRE NUMÉRO WHATSAPP EN FORMAT INTERNATIONAL SANS LE "+"
+// Exemple pour Burkina Faso (226) : 226XXXXXXXX
+const SELLER_WHATSAPP = "22665967976";
+
+const productEl = document.getElementById("product");
+const qtyEl = document.getElementById("qty");
+const depositEl = document.getElementById("deposit");
+const priceLine = document.getElementById("priceLine");
+
+function fmtFCFA(n){
+  return new Intl.NumberFormat('fr-FR', {maximumFractionDigits:0}).format(n) + " FCFA";
+}
+
+function updatePrices(){
+  const sel = productEl.value;
+  if(!sel){ depositEl.textContent = "—"; priceLine.textContent=""; return; }
+  const [name, priceStr] = sel.split("|");
+  const price = Number(priceStr);
+  const qty = Math.max(1, Number(qtyEl.value||1));
+  const total = price * qty;
+  const deposit = Math.ceil(total / 3);
+  priceLine.textContent = `Prix unitaire : ${fmtFCFA(price)} • Quantité : ${qty} • Total : ${fmtFCFA(total)}`;
+  depositEl.textContent = fmtFCFA(deposit);
+}
+
+productEl.addEventListener("change", updatePrices);
+qtyEl.addEventListener("input", updatePrices);
+updatePrices();
+
+document.getElementById("preorderForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const sel = productEl.value;
+  if(!sel) { alert("Veuillez choisir un produit."); return; }
+  const [name, priceStr] = sel.split("|");
+  const price = Number(priceStr);
+  const qty = Math.max(1, Number(qtyEl.value||1));
+  const variant = document.getElementById("variant").value.trim();
+  const city = document.getElementById("city").value.trim();
+  const delivery = document.getElementById("delivery").value;
+  const custName = document.getElementById("name").value.trim();
+  const custPhone = document.getElementById("phone").value.trim();
+  const pay = document.getElementById("pay").value;
+  const notes = document.getElementById("notes").value.trim();
+
+  const total = price * qty;
+  const deposit = Math.ceil(total / 3);
+
+  const lines = [
+    "📝 *NOUVELLE PRÉCOMMANDE*",
+    `• Produit : ${name}${variant ? " ("+variant+")" : ""}`,
+    `• Prix unitaire : ${fmtFCFA(price)}`,
+    `• Quantité : ${qty}`,
+    `• Total : ${fmtFCFA(total)}`,
+    `• Acompte (1/3) : ${fmtFCFA(deposit)}`,
+    `• Mode de livraison : ${delivery}`,
+    `• Ville : ${city}`,
+    `• Nom : ${custName}`,
+    `• Téléphone : ${custPhone}`,
+    `• Paiement acompte : ${pay}`,
+    notes ? `• Notes : ${notes}` : ""
+  ].filter(Boolean);
+
+  const msg = encodeURIComponent(lines.join("\n"));
+  const url = `https://wa.me/${SELLER_WHATSAPP}?text=${msg}`;
+  window.open(url, "_blank");
+});
+</script>
+</body>
+</html>
